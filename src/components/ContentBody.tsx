@@ -1,8 +1,9 @@
-import React, { FC, ReactElement } from 'react';
+import React, { ReactElement, Component } from 'react';
 import { SiteModel } from './App';
 
 interface ContentBodyProps {
   siteModel: SiteModel;
+  onWordClick: Function;
 }
 
 const findWordBoundsFromIndex = (string: string, index: number): number[] => {
@@ -27,46 +28,49 @@ const findWordBoundsFromIndex = (string: string, index: number): number[] => {
   return [-1, -1];
 }
 
-function onClick(this: HTMLTextAreaElement): void {
-  const [start, end] = findWordBoundsFromIndex(this.value, this.selectionStart);
-  if (start !== -1 && end !== -1) this.setSelectionRange(start, end);
-}
+export default class ContentBody extends Component<ContentBodyProps> {
+  onClick(this: HTMLTextAreaElement, onWordClick: Function): void {
+    const [start, end] = findWordBoundsFromIndex(this.value, this.selectionStart);
+    if (start !== -1 && end !== -1) this.setSelectionRange(start, end);
+  
+    onWordClick(this.value.slice(start, end));
+  }
 
-const resizeTextArea = (ref: HTMLTextAreaElement | null): void => {
-  // need to trigger size->0->newsize as text area will expand but not contract otherwise
-  const resize = () => {
-    if (!ref) return;
-    ref.style.height = '0px';
-    ref.style.height = ref.scrollHeight+'px';
-  };
+  resizeTextArea = (ref: HTMLTextAreaElement | null): void => {
+    // need to trigger size->0->newsize as text area will expand but not contract otherwise
+    const resize = () => {
+      if (!ref) return;
+      ref.style.height = '0px';
+      ref.style.height = ref.scrollHeight+'px';
+    };
+  
+    // Add resize listener and trigger it for initial height setting
+    if (ref) {
+      const onclick = this.onClick.bind(ref, this.props.onWordClick);
+      ref.onclick = onclick;
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  }
 
-  // Add resize listener and trigger it for initial height setting
-  if (ref) {
-    const onclick = onClick.bind(ref);
-    ref.onclick = onclick;
-    window.addEventListener('resize', resize);
-    resize();
+  generateParagraphs = (siteModel: SiteModel): ReactElement[] => (
+    siteModel.paragraphs.map((p, idx) => {
+      const text = (idx === 0 ? `${siteModel.publicationInfo} - ` : '') + p;
+      return <textarea readOnly ref={this.resizeTextArea} value={text} key={idx} />
+    })
+  );
+
+  render() {
+    const { siteModel } = this.props;
+    return (
+      <div className="content-body">
+        <textarea className='title'
+          ref={this.resizeTextArea}
+          value={siteModel.title}
+          readOnly
+        />
+        {this.generateParagraphs(siteModel)}
+      </div>
+    );
   }
 }
-
-const generateParagraphs = (siteModel: SiteModel): ReactElement[] => (
-  siteModel.paragraphs.map((p, idx) => {
-    const text = (idx === 0 ? `${siteModel.publicationInfo} - ` : '') + p;
-    return <textarea readOnly ref={resizeTextArea} value={text} key={idx} />
-  })
-);
-
-const ContentBody: FC<ContentBodyProps> = ({siteModel}) => {
-  return (
-    <div className="content-body">
-      <textarea className='title'
-        ref={resizeTextArea}
-        value={siteModel.title}
-        readOnly
-      />
-      {generateParagraphs(siteModel)}
-    </div>
-  );
-}
-
-export default ContentBody;
