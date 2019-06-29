@@ -1,5 +1,7 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
+$responsive-breakpoint: (max-width: 1160px);
+
 %container {
   width: auto;
   max-width: 1150px;
@@ -24,7 +26,7 @@
       color: #959595;
       font-size: 20px;
 
-      @media screen and (max-width: 1160px) {
+      @media screen and ($responsive-breakpoint) {
         height: 70px;
         box-shadow: unset;
         padding: 0 10px;
@@ -36,14 +38,14 @@
         img {
           max-height: calc(45vw / 5);
 
-          @media screen and (max-width: 1160px) {
+          @media screen and ($responsive-breakpoint) {
             max-height: 42px;
           }
         }
       }
 
       p {
-        @media screen and (max-width: 1160px) {
+        @media screen and ($responsive-breakpoint) {
           display: none;
         }
       }
@@ -64,7 +66,7 @@
           content: 'LOG IN';
         }
 
-        @media screen and (max-width: 1160px) {
+        @media screen and ($responsive-breakpoint) {
           &::before {
             font-family: 'Font Awesome 5 Free';
             content: '\f0c9';
@@ -78,7 +80,10 @@
   .content-body {
     @extend %container;
     margin: 34px auto;
-    max-width: 80%;
+
+    @media screen and ($responsive-breakpoint) {
+      max-width: 80%;
+    }
 
     h1 {
       padding: none;
