@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { FC } from 'react';
 import './App.scss';
+import Header from './Header';
 
-const App: React.FC = () => {
+export interface SiteModel {
+  title: string;
+  publicationInfo: string;
+  paragraphs: string[];
+}
+
+interface AppProps {
+  siteModel: SiteModel;
+}
+
+const App: FC<AppProps> = ({siteModel}) => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <h1 children={siteModel.title} />
+      {siteModel.paragraphs.map(p => <p children={p} />)}
     </div>
   );
 }
