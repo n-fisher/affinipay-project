@@ -7,6 +7,7 @@ const mapDispatchToProps = (dispatch: Function) => {
     // normally I'd make this a thunk or saga, but running close to the deadline
     onWordClick: (word: string) => {
       dispatch(startLookup(word));
+      if (!word) return;
 
       let definition = '';
       try {
