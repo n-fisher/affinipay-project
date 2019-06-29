@@ -38,9 +38,11 @@ To start:
 
 - Additionally, I had made the redux store keep track of prior lookups to eventually reference that cache over repeated API calls. I didn't have time to build the cache read aspect, but that would be one of my next steps.
 
-- Finally, I did break spec by not making the navbar items click-to-searchable. Next steps would be abstracting some of the ContentBody code and using it in the header items as well.
+- I did break spec by not making the navbar items click-to-searchable. Next steps would be abstracting some of the ContentBody code and using it in the header items as well.
 
 - I broke best practices a little bit between a shoehorned onclick in App.tsx to clear the popup, and a general clearing of all textarea selectionRanges inside a reducer that shouldn't have side effects. Again, those would be some of my next to-dos given more time.
+
+- Finally I didn't write tests as I had hoped to. In a longer timeframe they would also be prioritized.
 
 ### But what I'm excited about outside of spec:
 
