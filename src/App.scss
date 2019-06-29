@@ -4,51 +4,77 @@
   margin: 0 auto;
 }
 
-header {
-  box-shadow: 0 2px 8px 2px rgba(0,0,0,0.2);
+.app {
+  color: rgb(51, 51, 51);
+  font-family: Arial;
 
-  .container {
-    @extend %container;
+  header {
+    box-shadow: 0 2px 8px 2px rgba(0,0,0,0.2);
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    height: 111px;
-    color: #959595;
-    font-size: 20px;
-    font-family: arial;
+    .container {
+      @extend %container;
 
-    @media screen and (max-width: 1160px) {
-      height: 70px;
-      box-shadow: unset;
-      padding: 0 10px;
-    }
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      height: 111px;
+      color: #959595;
+      font-size: 20px;
 
-    .logo {
-      flex-basis: 45%;
+      @media screen and (max-width: 1160px) {
+        height: 70px;
+        box-shadow: unset;
+        padding: 0 10px;
+      }
 
-      img {
-        max-height: calc(45vw / 5);
+      .logo {
+        flex-basis: 45%;
 
-        @media screen and (max-width: 1160px) {
-          max-height: 42px;
+        img {
+          max-height: calc(45vw / 5);
+
+          @media screen and (max-width: 1160px) {
+            max-height: 42px;
+          }
         }
       }
+
+      button {
+        height: auto;
+        line-height: 22px;
+        background: #143c60;
+        border: none;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 18px;
+        padding: 10px 25px;
+        font-weight: bold;
+        margin-left: 25px;
+      }
+    }
+  }
+
+  .content-body {
+    @extend %container;
+    margin: 34px auto;
+
+    h1 {
+      padding: none;
+      font-size: 30px;
+      font-weight: normal;
+      line-height: 45px;
     }
 
-    button {
-      height: auto;
-      line-height: 22px;
-      background: #143c60;
-      border: none;
-      color: #fff;
-      text-transform: uppercase;
-      font-size: 18px;
-      padding: 10px 25px;
-      font-weight: bold;
-      margin-left: 25px;
+    p {
+      font-family: serif;
+      font-size: 22px;
+      line-height: 28px;
+      margin-bottom: 10px;
+
+      .meta {
+        font-weight: bold;
+      }
     }
   }
 }
-

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import './App.scss';
 import Header from './Header';
+import ContentBody from './ContentBody'
 
 export interface SiteModel {
   title: string;
@@ -14,10 +15,9 @@ interface AppProps {
 
 const App: FC<AppProps> = ({siteModel}) => {
   return (
-    <div className="App">
+    <div className="app">
       <Header />
-      <h1 children={siteModel.title} />
-      {siteModel.paragraphs.map(p => <p children={p} />)}
+      <ContentBody siteModel={siteModel}/>
     </div>
   );
 }
