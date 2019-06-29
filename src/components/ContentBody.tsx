@@ -34,7 +34,7 @@ export default class ContentBody extends Component<ContentBodyProps> {
     const [start, end] = findWordBoundsFromIndex(this.value, this.selectionStart);
     if (start !== -1 && end !== -1) this.setSelectionRange(start, end);
   
-    onWordClick(this.value.slice(start, end));
+    onWordClick(this.value.slice(start, end).toLowerCase());
     saveCoords(ev.x, ev.y);
   }
 
