@@ -93,6 +93,7 @@ $responsive-breakpoint: (max-width: 1160px);
       width: 100%;
       resize: none;
       border: none;
+      outline: none;
 
       &.title {
         padding: none;
