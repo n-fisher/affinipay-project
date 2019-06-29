@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import '../styles//App.scss';
 import Header from './Header';
-import ContentBody from './ContentBody'
+import ContentBodyContainer from './ContentBodyContainer'
 
 export interface SiteModel {
   title: string;
@@ -17,7 +17,7 @@ const App: FC<AppProps> = ({siteModel}) => {
   return (
     <div className="app">
       <Header />
-      <ContentBody siteModel={siteModel}/>
+      <ContentBodyContainer siteModel={siteModel}/>
     </div>
   );
 }
