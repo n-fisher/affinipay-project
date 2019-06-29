@@ -4,6 +4,7 @@ import { SiteModel } from './App';
 interface ContentBodyProps {
   siteModel: SiteModel;
   onWordClick: Function;
+  saveCoords: Function;
 }
 
 const findWordBoundsFromIndex = (string: string, index: number): number[] => {
@@ -29,11 +30,12 @@ const findWordBoundsFromIndex = (string: string, index: number): number[] => {
 }
 
 export default class ContentBody extends Component<ContentBodyProps> {
-  onClick(this: HTMLTextAreaElement, onWordClick: Function): void {
+  onClick(this: HTMLTextAreaElement, onWordClick: Function, saveCoords: Function, ev: MouseEvent): void {
     const [start, end] = findWordBoundsFromIndex(this.value, this.selectionStart);
     if (start !== -1 && end !== -1) this.setSelectionRange(start, end);
   
     onWordClick(this.value.slice(start, end));
+    saveCoords(ev.x, ev.y);
   }
 
   resizeTextArea = (ref: HTMLTextAreaElement | null): void => {
@@ -46,7 +48,7 @@ export default class ContentBody extends Component<ContentBodyProps> {
   
     // Add resize listener and trigger it for initial height setting
     if (ref) {
-      const onclick = this.onClick.bind(ref, this.props.onWordClick);
+      const onclick = this.onClick.bind(ref, this.props.onWordClick, this.props.saveCoords);
       ref.onclick = onclick;
       window.addEventListener('resize', resize);
       resize();
