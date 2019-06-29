@@ -5,7 +5,7 @@ const Header: FC = () => {
     <header>
       <div className='container'>
         <div className='logo'>
-          <img src='/logo.png' />
+          <img alt='logo' src='/logo.png' />
         </div>
         <p>Member Benefits</p>
         <p>Partners</p>

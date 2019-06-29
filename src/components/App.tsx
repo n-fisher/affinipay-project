@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './App.scss';
+import '../styles//App.scss';
 import Header from './Header';
 import ContentBody from './ContentBody'
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App, { SiteModel } from './App';
+import './styles/index.css';
+import App, { SiteModel } from './components/App';
 import * as serviceWorker from './serviceWorker';
 
 const siteModel: SiteModel = {
