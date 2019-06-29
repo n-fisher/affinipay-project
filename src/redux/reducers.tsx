@@ -15,12 +15,23 @@ function lookup(state = {}, action: AnyAction) {
       return {
          ...state, 
          [word]: null,
+         currentWord: null
       };
     }
 
     case FINISH_LOOKUP: {
       const { word, definition } = action.payload;
-      if (!word) return state;
+
+      // clear highlights, hacky-ish as i'm running out of time
+      let i = 0, textareas = document.getElementsByTagName('textarea');
+      while (i < textareas.length) {
+        textareas[i++].setSelectionRange(0, 0);
+      }
+
+      if (!word || !definition) return {
+        ...state,
+        currentWord: null
+      };
 
       return {
         ...state,
