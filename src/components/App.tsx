@@ -3,6 +3,8 @@ import '../styles//App.scss';
 import Header from './Header';
 import ContentBodyContainer from './ContentBodyContainer'
 import PopoverContainer from './PopoverContainer';
+import { startLookup } from '../redux/actions';
+import store from '../redux/store';
 
 export interface SiteModel {
   title: string;
@@ -16,7 +18,9 @@ interface AppProps {
 
 const App: FC<AppProps> = ({siteModel}) => {
   return (
-    <div className="app">
+    <div className="app"
+      onClick={_=> store.dispatch(startLookup(''))}
+    >
       <Header />
       <ContentBodyContainer siteModel={siteModel}/>
       <PopoverContainer />
