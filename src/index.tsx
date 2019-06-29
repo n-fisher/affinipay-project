@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
 import App, { SiteModel } from './components/App';
+import './styles/index.css';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import { startLookup, finishLookup, showPopup, hidePopup } from "./redux/actions";
 import * as serviceWorker from './serviceWorker';
 
 const siteModel: SiteModel = {
@@ -17,7 +20,11 @@ const siteModel: SiteModel = {
   ]
 }
 
-ReactDOM.render(<App siteModel={siteModel} />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App siteModel={siteModel} />
+  </Provider>
+, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
