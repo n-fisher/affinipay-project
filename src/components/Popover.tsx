@@ -6,17 +6,15 @@ export interface PopoverProps {
   word: string;
   definition: string;
   visible: Boolean;
-  onDismiss: Function;
 }
 
-const Popover: FC<PopoverProps> = ({x, y, word, definition, visible, onDismiss}) => {
+const Popover: FC<PopoverProps> = ({x, y, word, definition, visible}) => {
   return visible && (
     <div className='popover'
       style={{
-        top: y,
+        top: y + window.scrollY,
         left: x
       }}
-      onClick={_=>onDismiss()}
     >
       <h4>{word}</h4>
       <p>{definition}</p>

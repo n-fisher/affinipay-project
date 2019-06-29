@@ -1,4 +1,4 @@
-import { START_LOOKUP, FINISH_LOOKUP, SHOW_POPUP, HIDE_POPUP, SAVE_COORDS } from "./actions";
+import { START_LOOKUP, FINISH_LOOKUP, SAVE_COORDS } from "./actions";
 import { combineReducers, AnyAction } from "redux";
 
 function lookup(state = {}, action: AnyAction) {

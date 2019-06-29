@@ -12,9 +12,7 @@ export interface ActionType extends AnyAction {
 
 export const START_LOOKUP = "START_LOOKUP";
 export const FINISH_LOOKUP = "FINISH_LOOKUP";
-export const SHOW_POPUP = "SHOW_POPUP";
-export const HIDE_POPUP = "HIDE_POPUP";
-export const SAVE_COORDS = "HIDE_PSAVE_COORDSOPUP";
+export const SAVE_COORDS = "SAVE_COORDS";
 
 export const startLookup = (word: string): ActionType => ({
   type: START_LOOKUP,
@@ -29,14 +27,4 @@ export const saveCoords = (x: number, y: number): ActionType => ({
 export const finishLookup = (word: string, definition: string): ActionType => ({
   type: FINISH_LOOKUP,
   payload: { word, definition }
-});
-
-export const hidePopup = (): ActionType => ({ 
-  type: HIDE_POPUP,
-  payload: {}
-});
-
-export const showPopup = (word: string): ActionType => ({ 
-  type: SHOW_POPUP,
-  payload: { word }
 });
