@@ -8,7 +8,7 @@ interface ContentBodyProps {
 function generateParagraphs(siteModel: SiteModel): ReactElement[]  {
   return siteModel.paragraphs.map((p, idx) => 
     <p>
-      {idx === 0 && 
+      {idx === 0 &&
       <span className='meta'>{siteModel.publicationInfo} - </span>}
       {p}
     </p>

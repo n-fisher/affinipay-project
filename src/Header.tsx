@@ -11,7 +11,7 @@ const Header: FC = () => {
         <p>Partners</p>
         <p>How It Works</p>
         <p>About</p>
-        <button>LOG IN</button>
+        <button />
       </div>
     </header>
   );
