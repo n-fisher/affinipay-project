@@ -38,6 +38,8 @@
     ]
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.9.0"
-  }
+    "@fortawesome/fontawesome-free": "^5.9.0",
+    "webpack-cli": "^3.3.5"
+  },
+  "proxy": "https://od-api.oxforddictionaries.com/"
 }
