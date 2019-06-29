@@ -4,7 +4,6 @@ import App, { SiteModel } from './components/App';
 import './styles/index.css';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import { startLookup, finishLookup, showPopup, hidePopup } from "./redux/actions";
 import * as serviceWorker from './serviceWorker';
 
 const siteModel: SiteModel = {
