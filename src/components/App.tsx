@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import '../styles//App.scss';
 import Header from './Header';
 import ContentBodyContainer from './ContentBodyContainer'
+import PopoverContainer from './PopoverContainer';
 
 export interface SiteModel {
   title: string;
@@ -18,6 +19,7 @@ const App: FC<AppProps> = ({siteModel}) => {
     <div className="app">
       <Header />
       <ContentBodyContainer siteModel={siteModel}/>
+      <PopoverContainer />
     </div>
   );
 }

@@ -1,15 +1,20 @@
-import { START_LOOKUP, FINISH_LOOKUP, SHOW_POPUP, HIDE_POPUP } from "./actions";
+import { START_LOOKUP, FINISH_LOOKUP, SHOW_POPUP, HIDE_POPUP, SAVE_COORDS } from "./actions";
 import { combineReducers, AnyAction } from "redux";
 
 function lookup(state = {}, action: AnyAction) {
   switch (action.type) {
     case START_LOOKUP: {
       const { word } = action.payload;
-      if (!word) return state;
+      if (!word) {
+        return {
+          ...state,
+          currentWord: null
+        };
+      }
 
       return {
-         ...state,
-         [word]: null 
+         ...state, 
+         [word]: null,
       };
     }
 
@@ -19,7 +24,8 @@ function lookup(state = {}, action: AnyAction) {
 
       return {
         ...state,
-        [word]: definition
+        [word]: definition,
+        currentWord: word
       }
     }
 
@@ -27,18 +33,15 @@ function lookup(state = {}, action: AnyAction) {
   }
 }
 
-function popup(state = null, action: AnyAction) {
+function coords(state = {x: 0, y: 0}, action: AnyAction) {
   switch (action.type) {
-    case SHOW_POPUP: {
+    case SAVE_COORDS: {
       return action.payload;
-    }
-    case HIDE_POPUP: {
-      return null;
     }
     default: return state;
   }
 }
 
-const lookupApp = combineReducers({ lookup, popup })
+const lookupApp = combineReducers({ lookup, coords })
 
 export default lookupApp;
