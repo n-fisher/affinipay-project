@@ -1,44 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Affinipay takehome project
 
-## Available Scripts
+A create-react-app -based page of text with dictionary API lookup capabilities.
 
-In the project directory, you can run:
+### Spec:
 
-### `npm start`
+- Compiles CSS from SCSS
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Fetches the definition from a Dictionary API
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- Highlights the current word that is being looked up
 
-### `npm test`
+- The highlighted word is not highlighted after its definition is not shown
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Shows the definition of the word looked up in a popover next to the highlighted word
 
-### `npm run build`
+- Browser requirements are that it must work in the last 2 major versions of each popular browser.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting started
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+This should run on localhost with yarn (https://yarnpkg.com/en/) as the only required dependency. I've stripped out the API key I was using in order to post the repo, the app is using the https://developer.oxforddictionaries.com API and expects `app_id` and `app_key` process.env variables.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+(For now I've found it easier to locally edit src/components/ContentBodyContainer.tsx lines :28, :29, :35, :36 with the corresponding values)
 
-### `npm run eject`
+To start: 
+- Add oxford dictionary keys via env variables or direct editing (happy to provide a copy of this repo privately with prepopulated keys)
+- `cd affinipay-project; yarn && yarn start`;
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Implementation notes
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### A few thoughts/caveats regarding the implementation and what I'd have done with more time:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- I made an unnecessarily complex nested XMLHttpReq in ContentBodyContainer due to time constraints, with longer it would have been implemented as a redux saga
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- I focused entirely on the frontend part of this assignment, and didn't have time to build out a comprehensive backend. Due to this, I recognize I've had to get hacky in:
+  - API requests from the frontend exposing the API key to anyone who knows how to open the dev console
+  - Proxying unknown requests to the dictionary API as a way to get around CORS restrictions (in package.json)
 
-## Learn More
+- Additionally, I had made the redux store keep track of prior lookups to eventually reference that cache over repeated API calls. I didn't have time to build the cache read aspect, but that would be one of my next steps.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Finally, I did break spec by not making the navbar items click-to-searchable. Next steps would be abstracting some of the ContentBody code and using it in the header items as well.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- I broke best practices a little bit between a shoehorned onclick in App.tsx to clear the popup, and a general clearing of all textarea selectionRanges inside a reducer that shouldn't have side effects. Again, those would be some of my next to-dos given more time.
+
+### But what I'm excited about outside of spec:
+
+- The page is fully responsive, though with some implementation details needing to be worked out (popups near edge of screen are constrained)
+
+- Leveraging <textarea>s and their HTML5 API features instead of individual word components to avoid generating hundreds of components per paragraph
+
+- Does the page look familiar? Not exactly pixel-perfect or using the custom font, but your news section was great inspiration!
